@@ -1,0 +1,19 @@
+{
+  "name": "animal-photos-tests",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cypress open",
+    "start:headless": "cypress run"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "^3.0.1"
+  },
+  "dependencies": {
+    "@cypress/browserify-preprocessor": "^1.0.2",
+    "ramda": "^0.25.0"
+  }
+}
