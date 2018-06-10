@@ -1,4 +1,4 @@
-import { startsWith, toPairs } from 'ramda';
+import { startsWith, toPairs } from "ramda";
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -26,17 +26,35 @@ import { startsWith, toPairs } from 'ramda';
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-const fixturePrefix = 'fixture:';
-const graphQLPath = 'http://localhost:4000/graphql';
+const fixturePrefix = "fixture:";
+const graphQLPath = "http://localhost:4000/graphql";
+
+Cypress.Commands.add("component", (selector, subComponents = {}, context) => {
+  let elements;
+
+  return cy
+    .get(selector)
+    .within(() => {
+      elements = Object.assign(
+        {
+          wrapper: () => cy.root()
+        },
+        subComponents
+      );
+    })
+    .then(() => {
+      return elements;
+    });
+});
 
 // Allows stubbing GraphQL responses by operation name.
-Cypress.Commands.add('visitStubbed', function(url, operations = {}) {
+Cypress.Commands.add("visitStubbed", (url, operations = {}) => {
   const operationData = {};
 
   toPairs(operations).forEach(([operation, stub]) => {
     if (startsWith(fixturePrefix, stub)) {
       // The stub starts with 'fixture' - load it from the fixtures folder.
-      cy.fixture(stub.replace(fixturePrefix, '')).then(data => {
+      cy.fixture(stub.replace(fixturePrefix, "")).then(data => {
         operationData[operation] = data;
       });
     } else {
@@ -47,7 +65,7 @@ Cypress.Commands.add('visitStubbed', function(url, operations = {}) {
 
   cy.visit(url, {
     onBeforeLoad: win => {
-      cy.stub(win, 'fetch')
+      cy.stub(win, "fetch")
         .withArgs(graphQLPath)
         .callsFake(serverStub(operationData));
     }
@@ -55,13 +73,13 @@ Cypress.Commands.add('visitStubbed', function(url, operations = {}) {
 });
 
 const serverStub = operations => (_, req) => {
-    const { operationName } = JSON.parse(req.body);
-    const resultStub = operations[operationName];
-    return resultStub ? Promise.resolve(responseStub(resultStub)) : {};
-  };
-  
+  const { operationName } = JSON.parse(req.body);
+  const resultStub = operations[operationName];
+  return resultStub ? Promise.resolve(responseStub(resultStub)) : {};
+};
+
 const responseStub = result => ({
-    json: () => Promise.resolve(result),
-    text: () => Promise.resolve(JSON.stringify(result)),
-    ok: true
+  json: () => Promise.resolve(result),
+  text: () => Promise.resolve(JSON.stringify(result)),
+  ok: true
 });
