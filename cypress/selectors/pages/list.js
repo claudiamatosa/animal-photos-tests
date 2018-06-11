@@ -8,5 +8,5 @@ export default ({ visit = false, stubs = {} } = {}) => {
     cy.visitStubbed("/", stubs);
   }
 
-  return component('[data-id="page-list"]', { header, navigation, photos });
+  return component('[data-id="page"]', { header, navigation, photos });
 };

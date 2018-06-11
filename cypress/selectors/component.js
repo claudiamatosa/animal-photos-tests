@@ -1,15 +1,20 @@
-export default (selector, subComponents = {}, context) => {
-  let elements;
+const component = (selector, subComponents = {}) => {
+  return {
+    selector,
+    subComponents,
+    wrapper: () => cy.get(selector),
+    component: name => {
+      const subComponent = subComponents[name]();
 
-  return cy
-    .get(selector)
-    .within(() => {
-      elements = Object.assign(
-        {
-          wrapper: () => cy.root()
-        },
-        subComponents
+      if (!subComponent)
+        throw new Error(`there is no component named ${name} in this page`);
+
+      return component(
+        `${selector} ${subComponent.selector}`,
+        subComponent.subComponents
       );
-    })
-    .then(() => elements);
+    }
+  };
 };
+
+export default component;
