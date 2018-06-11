@@ -29,24 +29,6 @@ import { startsWith, toPairs } from "ramda";
 const fixturePrefix = "fixture:";
 const graphQLPath = "http://localhost:4000/graphql";
 
-Cypress.Commands.add("component", (selector, subComponents = {}, context) => {
-  let elements;
-
-  return cy
-    .get(selector)
-    .within(() => {
-      elements = Object.assign(
-        {
-          wrapper: () => cy.root()
-        },
-        subComponents
-      );
-    })
-    .then(() => {
-      return elements;
-    });
-});
-
 // Allows stubbing GraphQL responses by operation name.
 Cypress.Commands.add("visitStubbed", (url, operations = {}) => {
   const operationData = {};
