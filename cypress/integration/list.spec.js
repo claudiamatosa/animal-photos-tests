@@ -1,6 +1,6 @@
 import listPage from "../support/pages/list";
 
-describe.only("List page", () => {
+describe("List page", () => {
   beforeEach(() => {
     listPage.visit({
       photos: "fixture:photos"
@@ -38,6 +38,23 @@ describe.only("List page", () => {
       cy.get("@navigationLinks")
         .eq(1)
         .should("have.text", "Upload");
+    });
+  });
+
+  describe("photos", () => {
+    beforeEach(() => {
+      listPage.getPhotos().as("photos");
+    });
+
+    it("displays the photos returned by the api", () => {
+      cy.fixture("photos.json").then(({ data: { photos } }) => {
+        photos.forEach(({ src }, index) => {
+          cy.get("@photos")
+            .eq(index)
+            .find("img")
+            .should("have.attr", "src", src);
+        });
+      });
     });
   });
 });
