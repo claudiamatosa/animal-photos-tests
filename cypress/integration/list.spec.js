@@ -1,41 +1,43 @@
-import ListPage from "../selectors/pages/list";
+import listPage from "../support/pages/list";
 
 describe.only("List page", () => {
-  let listPage;
-
   beforeEach(() => {
-    listPage = ListPage({
-      visit: true,
-      stubs: {
-        photos: "fixture:photos"
-      }
+    listPage.visit({
+      photos: "fixture:photos"
     });
   });
 
   it("displays a header with emojis", () => {
-    const header = listPage.component("header").wrapper();
+    const header = listPage.getHeader();
 
     header.should("be.visible");
     header.should("have.text", "🐭🐶🐱🐌🙊🐣");
   });
 
-  it("displays a navigation bar with two links", () => {
-    const navigation = listPage.component("navigation");
-    navigation.wrapper().should("be.visible");
+  describe("navigation bar", () => {
+    beforeEach(() => {
+      listPage.getNavigation().as("navigation");
+      listPage.getNavigationLinks().as("navigationLinks");
+    });
 
-    navigation
-      .component("items")
-      .wrapper()
-      .as("links");
+    it("displays", () => {
+      cy.get("@navigation").should("be.visible");
+    });
 
-    cy.get("@links").should("have.length", 2);
+    it("contains two links", () => {
+      cy.get("@navigationLinks").should("have.length", 2);
+    });
 
-    cy.get("@links")
-      .eq(0)
-      .should("have.text", "List");
+    it("Displays a link to the list", () => {
+      cy.get("@navigationLinks")
+        .eq(0)
+        .should("have.text", "List");
+    });
 
-    cy.get("@links")
-      .eq(1)
-      .should("have.text", "Upload");
+    it("Displays a link to the the upload form", () => {
+      cy.get("@navigationLinks")
+        .eq(1)
+        .should("have.text", "Upload");
+    });
   });
 });
