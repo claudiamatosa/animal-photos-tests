@@ -1,5 +1,6 @@
 import header from "../components/header";
 import navigation from "../components/navigation";
+import notification from "../components/notification";
 import uploadForm from "../components/upload-form";
 
 const selectors = {
@@ -14,6 +15,10 @@ const getTitle = () => cy.get(selectors.title);
 const getHeader = header.getWrapper;
 const getNavigation = navigation.getWrapper;
 const getForm = uploadForm.getWrapper;
+const getUploadedPhoto = uploadForm.getUploadedPhoto;
+const getUploadedPhotoImage = uploadForm.getUploadedPhotoImage;
+const getUploadedPhotoMeta = uploadForm.getUploadedPhotoMeta;
+const getNotification = notification.getAlert;
 
 const selectImage = fixtureName => {
   const type = "image/jpeg";
@@ -44,6 +49,10 @@ export default {
   getTitle,
   getHeader,
   getNavigation,
+  getUploadedPhoto,
+  getUploadedPhotoImage,
+  getUploadedPhotoMeta,
+  getNotification,
   getForm,
   selectImage,
   submitForm

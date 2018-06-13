@@ -26,24 +26,55 @@ describe("List page", () => {
     });
   });
 
-  describe.only("successful upload", () => {
+  describe("successful upload", () => {
     beforeEach(() => {
+      cy.fixture("upload-success.json").as("uploadSuccess");
+
       uploadPage.visit({
         addPhoto: "fixture:upload-success"
       });
-    });
 
-    it("displays the uploaded photo", () => {
       uploadPage.selectImage("cat.jpg");
       uploadPage.submitForm();
     });
+
+    it("displays the uploaded photo", () => {
+      cy.get("@uploadSuccess").then(response =>
+        uploadPage
+          .getUploadedPhotoImage()
+          .should("have.attr", "src", response.data.addPhoto.src)
+      );
+    });
+
+    it("displays the description", () => {
+      cy.get("@uploadSuccess").then(response =>
+        uploadPage
+          .getUploadedPhotoMeta()
+          .should("contain", response.data.addPhoto.description)
+      );
+    });
+
+    it("displays the tags", () => {
+      cy.get("@uploadSuccess").then(response =>
+        uploadPage
+          .getUploadedPhotoMeta()
+          .should("contain", response.data.addPhoto.tags.join(", "))
+      );
+    });
   });
 
-  describe("failed upload", () => {
+  describe.only("failed upload", () => {
     beforeEach(() => {
       uploadPage.visit({
         addPhoto: "fixture:upload-failure"
       });
+
+      uploadPage.selectImage("restaurant.jpg");
+      uploadPage.submitForm();
+    });
+
+    it("displays an error notification", () => {
+      uploadPage.getNotification().should("be.visible");
     });
   });
 });
