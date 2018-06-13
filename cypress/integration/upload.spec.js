@@ -63,7 +63,7 @@ describe("List page", () => {
     });
   });
 
-  describe.only("failed upload", () => {
+  describe("failed upload", () => {
     beforeEach(() => {
       uploadPage.visit({
         addPhoto: "fixture:upload-failure"
