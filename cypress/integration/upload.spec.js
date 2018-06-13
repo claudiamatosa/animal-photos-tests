@@ -66,11 +66,24 @@ describe("List page", () => {
     });
   });
 
-  describe("failed upload", () => {
+  describe("failed upload (mocks)", () => {
     beforeEach(() => {
       uploadPage.visit({
         addPhoto: "fixture:upload-failure"
       });
+
+      uploadPage.selectImage("restaurant.jpg");
+      uploadPage.submitForm();
+    });
+
+    it("displays an error notification", () => {
+      uploadPage.getNotification().should("be.visible");
+    });
+  });
+
+  describe("failed upload (no mocks)", () => {
+    beforeEach(() => {
+      uploadPage.visit();
 
       uploadPage.selectImage("restaurant.jpg");
       uploadPage.submitForm();

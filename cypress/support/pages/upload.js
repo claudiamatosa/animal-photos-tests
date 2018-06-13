@@ -7,8 +7,12 @@ const selectors = {
   title: '[data-id="page-title"]'
 };
 
-const visit = (stubs = {}) => {
-  cy.visitStubbed("/upload", stubs);
+const visit = stubs => {
+  if (stubs) {
+    cy.visitStubbed("/upload", stubs);
+  } else {
+    cy.visit("/upload");
+  }
 };
 
 const getTitle = () => cy.get(selectors.title);
