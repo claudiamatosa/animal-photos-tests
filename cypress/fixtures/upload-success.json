@@ -1,0 +1,30 @@
+{
+  "data": {
+    "addPhoto": {
+      "id": "-LEq4y25KrTb_ZGbk9ce",
+      "src":
+        "https://storage.googleapis.com/animal-photos.appspot.com/178ee6e0-6e8f-11e8-babd-09f0dd6fb43c-c4b83e9b955b6e11c1b20fefd6ee400c.jpg?GoogleAccessId=firebase-adminsdk-csl5i@animal-photos.iam.gserviceaccount.com&Expires=4102444800&Signature=sDyePLEAkzlX9iZ%2FIwj7MiB06jIquqX4%2FGstHivFGXC7GcOv0SPKDOQWueXDPPR%2BjHtT01%2FqhpC3wWnMa8undOPz7m%2F1TqDDBFwJn0liEQwPHU1sVl1LMF5iqrV%2FajiVeMPrWgMa5qcjqjBNAfh2FfkYARDPg%2FbhKRXyZYIOFRoOj8s7SUGd%2FaqXRBm5wNU4gku5Lw2N8h9pKJtpGfh5q%2FtNNQWrLCGHJUU9L0eZVGdnbG9%2FXoT06dk9SU06dbPBsIxyHGiJEAhZch%2BgwDWFn0RrF7t4ZVCy2hrRXHqpjkqbljNtYsITDyPDkdZr4Bm6QZ1v9lPPpJkXIyE32bONyQ%3D%3D",
+      "description": "a cat that is lying down and looking at the camera",
+      "tags": [
+        "cat",
+        "laying",
+        "animal",
+        "sitting",
+        "outdoor",
+        "building",
+        "mammal",
+        "lying",
+        "white",
+        "looking",
+        "black",
+        "front",
+        "gray",
+        "grey",
+        "striped",
+        "large",
+        "sleeping"
+      ],
+      "__typename": "Photo"
+    }
+  }
+}

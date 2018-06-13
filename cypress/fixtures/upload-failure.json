@@ -1,0 +1,13 @@
+{
+  "data": null,
+  "errors": [
+    {
+      "message": "Input image is too large.",
+      "locations": [{ "line": 2, "column": 3 }],
+      "path": ["addPhoto"],
+      "type": "COMPUTER_VISION_API_ERROR",
+      "data": { "code": "ANALYSIS_ERROR" },
+      "stack": "Error: Input image is too large."
+    }
+  ]
+}
