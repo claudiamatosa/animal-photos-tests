@@ -50,6 +50,8 @@ Cypress.Commands.add("visitStubbed", (url, operations = {}) => {
       cy.stub(win, "fetch")
         .withArgs(graphQLPath)
         .callsFake(serverStub(operationData));
+
+      win.fetch.callThrough();
     }
   });
 });
