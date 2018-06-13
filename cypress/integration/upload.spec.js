@@ -26,6 +26,32 @@ describe("List page", () => {
     });
   });
 
+  describe("elements are present in mobile", () => {
+    beforeEach(() => {
+      uploadPage.visit();
+      cy.viewport("iphone-3");
+    });
+
+    it("displays the header", () => {
+      uploadPage.getHeader().should("be.visible");
+    });
+
+    it("displays the navigation bar", () => {
+      uploadPage.getNavigation().should("be.visible");
+    });
+
+    it("displays the title", () => {
+      uploadPage
+        .getTitle()
+        .should("be.visible")
+        .should("have.text", "Upload");
+    });
+
+    it("displays the form", () => {
+      uploadPage.getForm().should("be.visible");
+    });
+  });
+
   describe("successful upload", () => {
     beforeEach(() => {
       cy.fixture("upload-success.json").as("uploadSuccess");
