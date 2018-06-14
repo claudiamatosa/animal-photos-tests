@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "cypress open",
-    "start:headless": "cypress run"
+    "start:headless": "cypress run --record --key d4e44583-6f3f-4660-8d02-aa6dc8098836"
   },
   "author": "",
   "license": "MIT",

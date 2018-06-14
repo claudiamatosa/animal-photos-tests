@@ -1,3 +1,4 @@
 {
-  "baseUrl": "http://animal-photos-cypress.surge.sh"
+  "baseUrl": "http://localhost:3000",
+  "projectId": "r2854r"
 }
