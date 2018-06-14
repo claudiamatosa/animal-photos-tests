@@ -1,6 +1,6 @@
 import uploadPage from "../support/pages/upload";
 
-describe("List page", () => {
+describe("Upload page", () => {
   ["macbook-15", "ipad-2", "iphone-6"].forEach(viewport => {
     describe(`elements are present in a ${viewport} screen`, () => {
       beforeEach(() => {
